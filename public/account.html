@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account - UniCafé</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/account.css">
+</head>
+<body>
+<!-- Header will be loaded with JavaScript -->
+<div id="header-placeholder"></div>
+
+<main class="main-content">
+  <div class="container">
+    <div class="section-title">
+      <h2>My Account</h2>
+      <p>View your order history and account details</p>
+    </div>
+
+    <div id="login-required" class="login-required" style="display: none;">
+      <p>Please <a href="login.html">login</a> to view your account.</p>
+    </div>
+
+    <div id="account-content" class="account-content" style="display: none;">
+      <div class="account-tabs">
+        <button class="tab-btn active" data-tab="orders">My Orders</button>
+        <button class="tab-btn" data-tab="profile">Profile</button>
+      </div>
+
+      <div id="orders-tab" class="tab-content active">
+        <div class="orders-container">
+          <div class="orders-header">
+            <h3>Order History</h3>
+          </div>
+
+          <div id="orders-loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading your orders...</p>
+          </div>
+
+          <div id="no-orders" class="no-orders" style="display: none;">
+            <p>You haven't placed any orders yet.</p>
+            <a href="menu.html" class="btn">Browse Menu</a>
+          </div>
+
+          <div id="orders-list" class="orders-list"></div>
+        </div>
+      </div>
+
+      <div id="profile-tab" class="tab-content">
+        <div class="profile-container">
+          <div class="profile-header">
+            <h3>Profile Information</h3>
+          </div>
+
+          <div id="profile-loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading your profile...</p>
+          </div>
+
+          <div id="profile-details" class="profile-details" style="display: none;">
+            <div class="profile-section">
+              <h4>Account Details</h4>
+              <div class="profile-info">
+                <div class="info-group">
+                  <label>Username:</label>
+                  <span id="profile-username"></span>
+                </div>
+                <div class="info-group">
+                  <label>Email:</label>
+                  <span id="profile-email"></span>
+                </div>
+                <div class="info-group">
+                  <label>Phone:</label>
+                  <span id="profile-phone"></span>
+                </div>
+                <div class="info-group">
+                  <label>Member Since:</label>
+                  <span id="profile-date"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-actions">
+              <button id="edit-profile-btn" class="btn">Edit Profile</button>
+              <button id="change-password-btn" class="btn btn-secondary">Change Password</button>
+            </div>
+          </div>
+
+          <!-- Edit Profile Form -->
+          <form id="edit-profile-form" class="profile-form" style="display: none;">
+            <div class="form-group">
+              <label for="edit-email">Email</label>
+              <input type="email" id="edit-email" name="email" class="form-control">
+              <div id="edit-email-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+              <label for="edit-phone">Phone (Optional)</label>
+              <input type="tel" id="edit-phone" name="phone" class="form-control">
+              <div id="edit-phone-error" class="error-message"></div>
+            </div>
+            <div id="edit-profile-error" class="error-message"></div>
+            <div class="form-actions">
+              <button type="submit" class="btn">Save Changes</button>
+              <button type="button" id="cancel-edit" class="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+
+          <!-- Change Password Form -->
+          <form id="change-password-form" class="profile-form" style="display: none;">
+            <div class="form-group">
+              <label for="current-password">Current Password</label>
+              <input type="password" id="current-password" name="current-password" class="form-control">
+              <div id="current-password-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+              <label for="new-password">New Password</label>
+              <input type="password" id="new-password" name="new-password" class="form-control">
+              <div id="new-password-error" class="error-message"></div>
+            </div>
+            <div class="form-group">
+              <label for="confirm-new-password">Confirm New Password</label>
+              <input type="password" id="confirm-new-password" name="confirm-new-password" class="form-control">
+              <div id="confirm-new-password-error" class="error-message"></div>
+            </div>
+            <div id="change-password-error" class="error-message"></div>
+            <div class="form-actions">
+              <button type="submit" class="btn">Change Password</button>
+              <button type="button" id="cancel-password-change" class="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Order Details Modal -->
+<div id="order-details-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Order Details</h3>
+      <button id="close-order-details" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-info">
+        <div class="info-group">
+          <label>Order ID:</label>
+          <span id="detail-order-id"></span>
+        </div>
+        <div class="info-group">
+          <label>Date Placed:</label>
+          <span id="detail-order-date"></span>
+        </div>
+        <div class="info-group">
+          <label>Pickup Time:</label>
+          <span id="detail-pickup-time"></span>
+        </div>
+        <div class="info-group">
+          <label>Status:</label>
+          <span id="detail-status"></span>
+        </div>
+        <div class="info-group">
+          <label>Total:</label>
+          <span id="detail-total"></span>
+        </div>
+        <div id="detail-notes-container" class="info-group">
+          <label>Notes:</label>
+          <span id="detail-notes"></span>
+        </div>
+      </div>
+
+      <div class="order-items">
+        <h4>Items Ordered</h4>
+        <div id="detail-items"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer will be loaded with JavaScript -->
+<div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/account.js"></script>
+</body>
+</html>

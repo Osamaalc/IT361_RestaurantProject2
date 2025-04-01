@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniCafé - University Restaurant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+</head>
+<body>
+<!-- Header will be loaded with JavaScript -->
+<div id="header-placeholder"></div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Welcome to UniCafé</h1>
+        <p>Delicious food served fresh daily on campus</p>
+        <div class="cta-buttons">
+            <a href="menu.html" class="btn">View Menu</a>
+            <a href="order.html" class="btn btn-secondary">Order Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Why Choose Us</h2>
+            <p>We pride ourselves on offering the best dining experience for the university community</p>
+        </div>
+        <div class="features-container">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <h3>Fresh Food</h3>
+                <p>Our dishes are prepared daily with fresh, high-quality ingredients</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Fast Service</h3>
+                <p>Quick service designed to fit into your busy university schedule</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Healthy Options</h3>
+                <p>Wide range of nutritious and healthy meal options</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Online Ordering</h3>
+                <p>Convenient online ordering for pickup to save you time</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Menu Items -->
+<section class="popular-items">
+    <div class="container">
+        <div class="section-title">
+            <h2>Popular Menu Items</h2>
+            <p>Check out our most ordered dishes that students love</p>
+        </div>
+        <div class="menu-items">
+            <!-- These will be dynamically loaded from the database, but for now we'll add static content -->
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="../assets/images/grilled_chicken.jpg" alt="Grilled Chicken">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Grilled Chicken</h3>
+                    <p>Tender grilled chicken breast with roasted vegetables and rice</p>
+                    <div class="menu-item-footer">
+                        <div class="price">$12.99</div>
+                        <button class="add-to-cart" data-id="1">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="../assets/images/club_sandwich.jpg" alt="Club Sandwich">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Club Sandwich</h3>
+                    <p>Triple-decker sandwich with chicken, bacon, lettuce, and tomato</p>
+                    <div class="menu-item-footer">
+                        <div class="price">$8.99</div>
+                        <button class="add-to-cart" data-id="4">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-image">
+                    <img src="../assets/images/vegetable_pasta.jpg" alt="Vegetable Pasta">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Vegetable Pasta</h3>
+                    <p>Pasta with mixed vegetables in creamy sauce</p>
+                    <div class="menu-item-footer">
+                        <div class="price">$10.99</div>
+                        <button class="add-to-cart" data-id="3">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="view-more">
+            <a href="menu.html" class="btn">View Full Menu</a>
+        </div>
+    </div>
+</section>
+
+<!-- Special Offers Section -->
+<section class="special-offers">
+    <div class="container">
+        <div class="section-title">
+            <h2>Today's Special Offers</h2>
+            <p>Enjoy these limited-time deals</p>
+        </div>
+        <div class="offers-container">
+            <div class="offer">
+                <div class="offer-content">
+                    <h3>Lunch Combo</h3>
+                    <p>Get a main dish, side and beverage for a special price</p>
+                    <div class="offer-price">
+                        <span class="old-price">$18.99</span>
+                        <span class="new-price">$14.99</span>
+                    </div>
+                    <a href="order.html" class="btn btn-secondary">Order Now</a>
+                </div>
+                <div class="offer-image">
+                    <img src="../assets/images/lunch_combo.jpg" alt="Lunch Combo">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="container">
+        <div class="section-title">
+            <h2>What Our Customers Say</h2>
+            <p>Feedback from students and faculty who love our food</p>
+        </div>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    <p>"The food is always fresh and delicious. The online ordering system saves me so much time between classes!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="../assets/images/student1.jpg" alt="Student">
+                    </div>
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Computer Science Student</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    <p>"Great variety of healthy options. I appreciate having nutritious choices available on campus."</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="../assets/images/professor.jpg" alt="Professor">
+                    </div>
+                    <div class="author-info">
+                        <h4>Dr. Michael Brown</h4>
+                        <p>Faculty Member</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    <p>"The staff is always friendly and the food is consistently good. My go-to place for lunch on campus."</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-image">
+                        <img src="../assets/images/student2.jpg" alt="Student">
+                    </div>
+                    <div class="author-info">
+                        <h4>James Wilson</h4>
+                        <p>Business Administration Student</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer will be loaded with JavaScript -->
+<div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/index.js"></script>
+</body>
+</html>

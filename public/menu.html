@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - UniCafé</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/menu.css">
+</head>
+<body>
+<!-- Header will be loaded with JavaScript -->
+<div id="header-placeholder"></div>
+
+<main class="main-content">
+    <div class="hero menu-hero">
+        <div class="hero-content">
+            <h1>Our Menu</h1>
+            <p>Explore our wide variety of delicious options</p>
+        </div>
+    </div>
+
+    <section class="menu-section">
+        <div class="container">
+            <div class="menu-categories">
+                <button class="category-filter active" data-category="all">All</button>
+                <!-- Categories will be loaded dynamically -->
+            </div>
+
+            <div class="menu-search">
+                <input type="text" id="menu-search-input" placeholder="Search menu items...">
+                <button id="menu-search-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="menu-items-container">
+                <!-- Menu items will be loaded dynamically -->
+                <div id="menu-items" class="menu-items"></div>
+
+                <div id="no-results" class="no-results" style="display: none;">
+                    <p>No menu items found. Please try a different search.</p>
+                </div>
+
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading menu items...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Preview -->
+    <div class="cart-preview">
+        <div class="cart-preview-header">
+            <h3>Your Cart</h3>
+            <button id="close-cart-preview"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="cart-preview-items" class="cart-preview-items">
+            <!-- Cart items will be displayed here -->
+        </div>
+        <div class="cart-preview-footer">
+            <div class="cart-preview-total">
+                Total: <span id="cart-preview-total">$0.00</span>
+            </div>
+            <a href="order.html" class="btn btn-secondary">Checkout</a>
+        </div>
+    </div>
+
+    <button id="view-cart-btn" class="view-cart-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count" class="cart-count">0</span>
+    </button>
+</main>
+
+<!-- Footer will be loaded with JavaScript -->
+<div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/menu.js"></script>
+</body>
+</html>

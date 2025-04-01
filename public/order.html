@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - UniCafé</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/order.css">
+</head>
+<body>
+<!-- Header will be loaded with JavaScript -->
+<div id="header-placeholder"></div>
+
+<main class="main-content">
+    <div class="container">
+        <div class="section-title">
+            <h2>Your Order</h2>
+            <p>Review your items and complete your order</p>
+        </div>
+
+        <div class="order-container">
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+
+                <div id="cart-empty-message" class="cart-empty-message" style="display: none;">
+                    <p>Your cart is empty. <a href="menu.html">Browse our menu</a> to add items.</p>
+                </div>
+
+                <div id="cart-items-container">
+                    <div class="cart-header">
+                        <div class="cart-header-item">Item</div>
+                        <div class="cart-header-price">Price</div>
+                        <div class="cart-header-quantity">Quantity</div>
+                        <div class="cart-header-subtotal">Subtotal</div>
+                        <div class="cart-header-actions"></div>
+                    </div>
+
+                    <div id="cart-items" class="cart-items">
+                        <!-- Cart items will be loaded dynamically -->
+                    </div>
+
+                    <div class="cart-footer">
+                        <button id="clear-cart-btn" class="btn-text">Clear Cart</button>
+                        <div class="cart-total">
+                            Total: <span id="cart-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-form">
+                <h3>Complete Your Order</h3>
+
+                <div id="login-required-message" class="login-required-message" style="display: none;">
+                    <p>Please <a href="login.html">login</a> or <a href="register.html">register</a> to complete your order.</p>
+                </div>
+
+                <form id="order-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="pickup-time">Pickup Time</label>
+                        <select id="pickup-time" name="pickup-time" class="form-control">
+                            <option value="">Select a pickup time</option>
+                            <!-- Pickup times will be generated dynamically -->
+                        </select>
+                        <div id="pickup-time-error" class="error-message"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notes">Special Instructions (Optional)</label>
+                        <textarea id="notes" name="notes" class="form-control" placeholder="Any special requests or instructions?"></textarea>
+                    </div>
+
+                    <div id="order-error" class="error-message"></div>
+
+                    <div class="form-group">
+                        <button type="submit" id="place-order-btn" class="btn btn-block">Place Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Order Confirmation Modal -->
+<div id="order-confirmation" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Order Placed Successfully!</h3>
+            <button id="close-modal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Your order has been placed successfully.</p>
+            <p>Order ID: <span id="order-id"></span></p>
+            <p>Pickup Time: <span id="confirmation-pickup-time"></span></p>
+            <p>Total: <span id="confirmation-total"></span></p>
+            <p>Thank you for ordering from UniCafé!</p>
+        </div>
+        <div class="modal-footer">
+            <a href="account.html" class="btn">View Your Orders</a>
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer will be loaded with JavaScript -->
+<div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/order.js"></script>
+</body>
+</html>
