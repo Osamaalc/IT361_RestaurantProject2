@@ -9,6 +9,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginButton = document.getElementById('login-button');
     const loginSpinner = loginButton.querySelector('.fa-spinner');
     const togglePasswordBtn = document.getElementById('toggle-password');
+    const socialButtons = document.querySelectorAll('.social-login');
+
+    // Add focus and blur events to form inputs for animation effects
+    const formInputs = document.querySelectorAll('.form-control');
+    formInputs.forEach(input => {
+        // Add focused class when input receives focus
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+
+        // Remove focused class when input loses focus
+        input.addEventListener('blur', () => {
+            input.parentElement.classList.remove('focused');
+            // Add filled class if the input has a value
+            if (input.value.trim() !== '') {
+                input.parentElement.classList.add('filled');
+            } else {
+                input.parentElement.classList.remove('filled');
+            }
+        });
+
+        // Initialize filled class if the input already has a value
+        if (input.value.trim() !== '') {
+            input.parentElement.classList.add('filled');
+        }
+    });
 
     // Check if user is already logged in
     if (localStorage.getItem('userLoggedIn') === 'true') {
@@ -37,6 +63,39 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.toggle('fa-eye-slash');
         });
     }
+
+    // Handle social login buttons (demo only)
+    socialButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const provider = this.classList.contains('google') ? 'Google' : 'Facebook';
+            showStatus(`${provider} login is not available in demo mode.`, 'danger');
+        });
+    });
+
+    // Add nice animation to inputs when they get focus
+    const handleInputFocus = (input) => {
+        const label = input.parentElement.previousElementSibling;
+        if (label) {
+            label.classList.add('active');
+        }
+    };
+
+    const handleInputBlur = (input) => {
+        const label = input.parentElement.previousElementSibling;
+        if (label && input.value === '') {
+            label.classList.remove('active');
+        }
+    };
+
+    [usernameInput, passwordInput].forEach(input => {
+        input.addEventListener('focus', () => handleInputFocus(input));
+        input.addEventListener('blur', () => handleInputBlur(input));
+
+        // Initialize if there's already a value
+        if (input.value !== '') {
+            handleInputFocus(input);
+        }
+    });
 
     // Form validation
     function validateForm() {
@@ -135,6 +194,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             localStorage.setItem('auth_expiration', expiration.toString());
                         }
 
+                        // Add success animation
+                        loginButton.innerHTML = '<i class="fas fa-check"></i> Success!';
+                        loginButton.classList.add('success');
+
                         // Show success message before redirect
                         showStatus('Login successful! Redirecting...', 'success');
 
@@ -146,6 +209,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         // Login failed
                         loginError.textContent = data.message || 'Invalid username or password';
+
+                        // Add shake animation to form
+                        loginForm.classList.add('shake');
+                        setTimeout(() => {
+                            loginForm.classList.remove('shake');
+                        }, 500);
                     }
                 })
                 .catch(error => {
@@ -159,4 +228,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         });
     }
+
+    // Add some animation for better UX
+    setTimeout(() => {
+        document.querySelector('.login-left').classList.add('animate-in');
+        document.querySelector('.login-right').classList.add('animate-in');
+    }, 200);
 });

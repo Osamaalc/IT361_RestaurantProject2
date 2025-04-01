@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
-            setupMobileMenu();
+            setupHeaderFunctionality();
             checkLoginStatus();
         });
 
@@ -17,15 +17,98 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
-// Mobile menu toggle
-function setupMobileMenu() {
+// Setup header functionality including mobile menu
+function setupHeaderFunctionality() {
+    // Add the overlay element to the body if it doesn't exist
+    if (!document.querySelector('.overlay')) {
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+    }
+
+    // Header scroll effect
+    const header = document.querySelector('.header');
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu functionality
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const mainNav = document.querySelector('.main-nav');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileMenuClose = document.querySelector('.mobile-menu-close');
+    const overlay = document.querySelector('.overlay');
+
+    function openMobileMenu() {
+        mobileMenu.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = ''; // Re-enable scrolling
+    }
 
     if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', function() {
-            mainNav.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
+        mobileMenuToggle.addEventListener('click', openMobileMenu);
+    }
+
+    if (mobileMenuClose) {
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Header cart button
+    const headerCartBtn = document.getElementById('header-cart-btn');
+
+    if (headerCartBtn) {
+        headerCartBtn.addEventListener('click', function() {
+            if (typeof openCartPreview === 'function') {
+                openCartPreview();
+            } else {
+                window.location.href = 'order.html';
+            }
+        });
+    }
+
+    // Add active class to current page link
+    const currentPage = window.location.pathname.split('/').pop();
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage ||
+            (currentPage === '' && href === 'index.html') ||
+            (currentPage === '/' && href === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage ||
+            (currentPage === '' && href === 'index.html') ||
+            (currentPage === '/' && href === 'index.html')) {
+            link.classList.add('active');
+        }
+    });
+
+    // Setup mobile logout link
+    const mobileLogoutLink = document.getElementById('mobile-logout-link');
+    if (mobileLogoutLink) {
+        mobileLogoutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            logout();
         });
     }
 }
@@ -65,6 +148,22 @@ function logout() {
 
     // Redirect to home page
     window.location.href = 'index.html';
+}
+
+// Function to update the cart count in the header
+function updateHeaderCartCount() {
+    const cartCountElements = document.querySelectorAll('.cart-count');
+    const itemCount = cart && typeof cart.getItemCount === 'function' ? cart.getItemCount() : 0;
+
+    cartCountElements.forEach(element => {
+        element.textContent = itemCount;
+
+        if (itemCount > 0) {
+            element.style.display = 'flex';
+        } else {
+            element.style.display = 'none';
+        }
+    });
 }
 
 // Show a notification message
@@ -237,17 +336,7 @@ const cart = {
 
     updateCartUI() {
         // Update cart icon with item count
-        const cartCount = document.querySelectorAll('.cart-count');
-
-        cartCount.forEach(count => {
-            count.textContent = this.getItemCount();
-
-            if (this.getItemCount() > 0) {
-                count.style.display = 'block';
-            } else {
-                count.style.display = 'none';
-            }
-        });
+        updateHeaderCartCount();
 
         // If on cart page, update cart items list
         this.updateCartPage();
