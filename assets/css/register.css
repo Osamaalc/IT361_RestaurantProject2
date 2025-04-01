@@ -1,0 +1,550 @@
+/* Enhanced Register Page Styles - Fixed for header compatibility */
+
+/* Custom variables for register page only */
+.register-page-styles {
+    --register-primary: #3a6ea5;
+    --register-primary-dark: #2d598d;
+    --register-primary-light: #4f89c5;
+    --register-secondary: #ff9800;
+    --register-text: #333;
+    --register-text-light: #777;
+    --register-border: #e0e0e0;
+    --register-background: #f7f9fc;
+    --register-error: #dc3545;
+    --register-success: #28a745;
+}
+
+/* Main structure */
+.register-main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--register-background);
+    padding: 40px 0;
+    margin-top: 30px;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.register-wrapper {
+    display: flex;
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Left side panel */
+.register-wrapper .register-left {
+    flex: 1;
+    background: linear-gradient(135deg, var(--register-primary), var(--register-primary-dark));
+    color: white;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-left-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    text-align: center;
+}
+
+.register-left .welcome-icon {
+    width: 80px;
+    height: 80px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 30px;
+    font-size: 34px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.register-left h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.register-left p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.decoration-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.decoration-circles .circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.decoration-circles .circle-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+}
+
+.decoration-circles .circle-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -100px;
+    right: -50px;
+}
+
+.decoration-circles .circle-3 {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    right: 50px;
+}
+
+/* Right side form */
+.register-wrapper .register-right {
+    flex: 1.2;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.register-right-content {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.register-header .register-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.register-header .register-logo .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--register-primary), var(--register-primary-dark));
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.register-header .register-logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--register-primary);
+}
+
+.register-header h2 {
+    font-size: 28px;
+    color: var(--register-text);
+    margin-bottom: 10px;
+}
+
+.register-header p {
+    color: var(--register-text-light);
+    font-size: 15px;
+}
+
+/* Alert messages */
+.register-main .alert {
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+.register-main .alert.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--register-error);
+    border-color: rgba(220, 53, 69, 0.3);
+}
+
+.register-main .alert.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--register-success);
+    border-color: rgba(40, 167, 69, 0.3);
+}
+
+/* Form elements */
+.register-form {
+    padding: 0;
+}
+
+.register-form .form-group {
+    margin-bottom: 20px;
+}
+
+.register-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--register-text);
+}
+
+.register-form .input-with-icon {
+    position: relative;
+}
+
+.register-form .input-with-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--register-text-light);
+    font-size: 16px;
+}
+
+.register-form .input-with-icon input {
+    padding-left: 45px;
+    width: 100%;
+    height: 50px;
+    border: 1px solid var(--register-border);
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.register-form .input-with-icon input:focus {
+    border-color: var(--register-primary);
+    box-shadow: 0 0 0 3px rgba(58, 110, 165, 0.15);
+    outline: none;
+}
+
+.register-form .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--register-text-light);
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+}
+
+.register-form .toggle-password:hover {
+    color: var(--register-primary);
+}
+
+.register-form .error-message {
+    color: var(--register-error);
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+/* Register Button */
+.register-form .btn-register {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(135deg, var(--register-primary), var(--register-primary-dark));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(58, 110, 165, 0.2);
+}
+
+.register-form .btn-register:hover {
+    background: linear-gradient(135deg, var(--register-primary-dark), var(--register-primary));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(58, 110, 165, 0.3);
+}
+
+.register-form .btn-register span {
+    margin-right: 8px;
+}
+
+/* Register Footer */
+.register-form .register-footer {
+    text-align: center;
+    font-size: 14px;
+    color: var(--register-text-light);
+}
+
+.register-form .register-footer a {
+    color: var(--register-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.register-form .register-footer a:hover {
+    color: var(--register-primary-dark);
+    text-decoration: underline;
+}
+
+/* Animations for register forms */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Apply animations */
+.register-wrapper .register-left {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.register-wrapper .register-right {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.register-wrapper .register-left.animate-in {
+    animation: slideInLeft 0.8s forwards ease-out;
+}
+
+.register-wrapper .register-right.animate-in {
+    animation: slideInRight 0.8s forwards ease-out;
+}
+
+.register-left .welcome-icon {
+    animation: float 6s ease-in-out infinite;
+}
+
+.register-header .register-logo {
+    animation: fadeIn 0.8s forwards;
+}
+
+.register-form .form-group {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+.register-form .form-group:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.register-form .form-group:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.register-form .form-group:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.register-form .form-group:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.register-form .form-group:nth-child(5) {
+    animation-delay: 1s;
+}
+
+.register-form .form-group:nth-child(6) {
+    animation-delay: 1.2s;
+}
+
+/* Shake animation on error */
+.register-form.shake {
+    animation: shake 0.5s;
+}
+
+/* Decoration circles animations */
+.decoration-circles .circle {
+    animation: pulse 8s infinite ease-in-out;
+}
+
+.decoration-circles .circle-1 {
+    animation-delay: 0s;
+}
+
+.decoration-circles .circle-2 {
+    animation-delay: 2s;
+}
+
+.decoration-circles .circle-3 {
+    animation-delay: 4s;
+}
+
+/* Button hover pulse effect */
+.register-form .btn-register:hover {
+    animation: pulse 1s;
+}
+
+/* Input focus effects */
+.register-form .input-with-icon input:focus + i {
+    color: var(--register-primary);
+    transform: translateY(-50%) scale(1.1);
+    transition: all 0.3s ease;
+}
+
+/* Toggle password animation */
+.register-form .toggle-password:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+/* Alert animations */
+.register-main .alert {
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Input field transition */
+.register-form .input-with-icon input {
+    transition: all 0.3s ease;
+}
+
+.register-form .input-with-icon input:focus {
+    transform: translateY(-2px);
+}
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .register-wrapper {
+        flex-direction: column;
+    }
+
+    .register-wrapper .register-left,
+    .register-wrapper .register-right {
+        flex: none;
+    }
+
+    .register-wrapper .register-left {
+        padding: 60px 40px;
+    }
+
+    .decoration-circles .circle-1 {
+        top: -100px;
+        left: -50px;
+    }
+
+    .decoration-circles .circle-3 {
+        top: 70%;
+        right: 30px;
+    }
+}
+
+@media (max-width: 576px) {
+    .register-main {
+        padding: 20px;
+    }
+
+    .register-container {
+        padding: 0;
+    }
+
+    .register-wrapper {
+        border-radius: 12px;
+    }
+
+    .register-wrapper .register-left {
+        padding: 40px 20px;
+    }
+
+    .register-left-content {
+        padding: 20px 10px;
+    }
+
+    .register-wrapper .register-right {
+        padding: 30px 20px;
+    }
+
+    .register-form .form-group {
+        animation-delay: 0ms;
+    }
+}

@@ -1,9 +1,16 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Setup form validation
-    validateForm('register-form', {
+// register.js - Complete Registration Form Handling
+document.addEventListener('DOMContentLoaded', () => {
+    initializeRegistrationForm();
+});
+
+function initializeRegistrationForm() {
+    const registerForm = document.getElementById('register-form');
+    const submitBtn = document.getElementById('register-button');
+    const spinner = submitBtn.querySelector('.fa-spinner');
+    const validationRules = {
         username: {
             required: true,
-            requiredMessage: 'Please choose a username',
+            requiredMessage: 'Please enter a username',
             minLength: 3,
             minLengthMessage: 'Username must be at least 3 characters'
         },
@@ -11,11 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
             required: true,
             requiredMessage: 'Please enter your email',
             email: true,
-            emailMessage: 'Please enter a valid email address'
+            emailMessage: 'Invalid email address'
         },
         password: {
             required: true,
-            requiredMessage: 'Please choose a password',
+            requiredMessage: 'Please enter a password',
             minLength: 6,
             minLengthMessage: 'Password must be at least 6 characters'
         },
@@ -25,63 +32,119 @@ document.addEventListener('DOMContentLoaded', function() {
             match: 'password',
             matchMessage: 'Passwords do not match'
         }
+    };
+
+    // Add real-time validation
+    Object.keys(validationRules).forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        field?.addEventListener('input', () => validateField(fieldId, validationRules[fieldId]));
     });
 
-    // Handle form submission
-    const registerForm = document.getElementById('register-form');
+    registerForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        toggleLoadingState(true, submitBtn, spinner);
 
-    if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        if (!validateForm(validationRules)) {
+            toggleLoadingState(false, submitBtn, spinner);
+            return;
+        }
 
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const registerError = document.getElementById('register-error');
+        try {
+            const formData = {
+                username: document.getElementById('username').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                password: document.getElementById('password').value
+            };
 
-            // Clear previous error
-            registerError.textContent = '';
-
-            // Validate passwords match
-            if (password !== confirmPassword) {
-                registerError.textContent = 'Passwords do not match';
-                return;
-            }
-
-            // Send registration request to API
-            fetch('../api/register.php', {
+            const response = await fetch('../api/register.php', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: username,
-                    email: email,
-                    phone: phone,
-                    password: password
-                })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Registration successful
-                        showNotification('Registration successful! You can now login.', 'success');
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
 
-                        // Redirect to login page after a short delay
-                        setTimeout(() => {
-                            window.location.href = 'login.html';
-                        }, 2000);
-                    } else {
-                        // Registration failed
-                        registerError.textContent = data.message || 'Registration failed. Please try again.';
-                    }
-                })
-                .catch(error => {
-                    registerError.textContent = 'An error occurred. Please try again.';
-                    console.error('Registration error:', error);
-                });
-        });
+            const data = await handleResponse(response);
+            handleRegistrationResult(data);
+        } catch (error) {
+            handleRegistrationError(error);
+        } finally {
+            toggleLoadingState(false, submitBtn, spinner);
+        }
+    });
+}
+
+function validateField(fieldId, rules) {
+    const field = document.getElementById(fieldId);
+    const errorElement = document.getElementById(`${fieldId}-error`);
+    const value = field.value.trim();
+    let isValid = true;
+
+    errorElement.textContent = '';
+
+    if (rules.required && !value) {
+        errorElement.textContent = rules.requiredMessage;
+        isValid = false;
     }
-});
+
+    if (rules.minLength && value.length < rules.minLength) {
+        errorElement.textContent = rules.minLengthMessage;
+        isValid = false;
+    }
+
+    if (rules.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        errorElement.textContent = rules.emailMessage;
+        isValid = false;
+    }
+
+    if (rules.match) {
+        const matchField = document.getElementById(rules.match);
+        if (value !== matchField.value.trim()) {
+            errorElement.textContent = rules.matchMessage;
+            isValid = false;
+        }
+    }
+
+    return isValid;
+}
+
+function validateForm(rules) {
+    return Object.keys(rules).every(fieldId => validateField(fieldId, rules[fieldId]));
+}
+
+async function handleResponse(response) {
+    if (!response.ok) {
+        const error = await response.text();
+        throw new Error(error || 'Registration failed');
+    }
+    return response.json();
+}
+
+function handleRegistrationResult(data) {
+    const errorElement = document.getElementById('register-error');
+    if (data.success) {
+        showNotification('Registration successful! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'login.html', 2000);
+    } else {
+        errorElement.textContent = data.message || 'Registration failed. Please try again.';
+    }
+}
+
+function handleRegistrationError(error) {
+    console.error('Registration error:', error);
+    document.getElementById('register-error').textContent =
+        error.message || 'An unexpected error occurred. Please try again.';
+}
+
+function toggleLoadingState(isLoading, button, spinner) {
+    button.disabled = isLoading;
+    spinner.style.display = isLoading ? 'inline-block' : 'none';
+}
+
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 5000);
+}
